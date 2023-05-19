@@ -1,4 +1,4 @@
->📋  This is the code repository of the paper Domain Feature Perturbation (DFP) for Domain Generalization. This repository contains the core code for DFP and code modified from the PyTorch suite DomainBed and Benchmark OdD-Bench.
+>📋  This is the code repository of the paper Domain Feature Perturbation (DFP) for Domain Generalization. This repository contains the core code for DFP and code modified from the PyTorch suite DomainBed and Benchmark [OoD-Bench]().
 
 # Domain Feature Perturbation for Domain Generalization
 
@@ -8,41 +8,78 @@ This repository is the official implementation of [Domain Feature Perturbation f
 
 ## Requirements
 
+Python 3.8, Pytorch 1.8
 To install requirements:
 
-```setup
-pip install -r requirements.txt
+```anaconda env
+conda env create -f environment.yaml
+```
+please modify the prefix to your anaconda dir
+
+## Dataset
+make sure the directory structures are as follows:
+
+```
+PACS
+└── kfold
+    ├── art_painting
+    ├── cartoon
+    ├── photo
+    └── sketch
 ```
 
->📋  Describe how to set up the environment, e.g. pip/conda/docker commands, download datasets, etc...
+```
+office_home
+├── Art
+├── Clipart
+├── Product
+├── RealWorld
+├── ImageInfo.csv
+└── imagelist.txt
+```
+
+```
+TerraIncognita
+├── location_38
+├── location_43
+├── location_46
+└── location_100
+```
 
 ## Training
 
 To train the model(s) in the paper, run this command:
 
-```train
-python train.py --input-data <path_to_data> --alpha 10 --beta 20
+```PACS
+bash sweep/PACS/run.sh launch /root/data 4,5,6,7
 ```
 
->📋  Describe how to train the models, with example commands on how to train the models in your paper, including the full training procedure and appropriate hyperparameters.
-
-## Evaluation
-
-To evaluate my model on ImageNet, run:
-
-```eval
-python eval.py --model-file mymodel.pth --benchmark imagenet
+```OfficeHome
+bash sweep/OfficeHome/run.sh launch /root/data 4,5,6,7
 ```
 
->📋  Describe how to evaluate the trained models on benchmarks reported in the paper, give commands that produce the results (section below).
+```TerraIncognita
+bash sweep/TerraIncognita/run.sh launch /root/data 0,1,2,3
+```
+
+>📋  You need to change "/root/data" to your own dir of corresponding dataset. "4,5,6,7" means the GPU ID you suppose to use.
+
+## Collect Results
+
+To collect the accuracy results, run:
+
+```
+python -m domainbed.scripts.collect_results\
+       --input_dir=/root/output/PACS
+```
+
+>📋  Please change the input_dir to your results dir.
 
 ## Pre-trained Models
 
 You can download pretrained models here:
 
-- [My awesome model](https://drive.google.com/mymodel.pth) trained on ImageNet using parameters x,y,z. 
-
->📋  Give a link to where/how the pretrained models can be downloaded and how they were trained (if applicable).  Alternatively you can have an additional column in your results table with a link to the models.
+- [Resnet-18 pretrained model](https://download.pytorch.org/models/resnet18-5c106cde.pth) trained on ImageNet. 
 
 ## Results
 
