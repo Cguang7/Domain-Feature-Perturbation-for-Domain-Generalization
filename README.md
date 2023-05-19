@@ -1,8 +1,8 @@
->📋  A template README.md for code accompanying a Machine Learning paper
+>📋  This is the code repository of the paper Domain Feature Perturbation (DFP) for Domain Generalization. This repository contains the core code for DFP and code modified from the PyTorch suite DomainBed and Benchmark OdD-Bench.
 
-# My Paper Title
+# Domain Feature Perturbation for Domain Generalization
 
-This repository is the official implementation of [My Paper Title](https://arxiv.org/abs/2030.12345). 
+This repository is the official implementation of [Domain Feature Perturbation for Domain Generalization](). 
 
 >📋  Optional: include a graphic explaining your approach/main result, bibtex entry, link to demos, blog posts and tutorials
 
